@@ -7,13 +7,17 @@ angular.
     templateUrl: 'phone-detail/phone-detail.template.html',
     controller: ['$routeParams', 'Phone',
       function PhoneDetailController($routeParams, Phone) {
-        var self = this;
-        self.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-          self.setImage(phone.images[0]);
-        });
+        var vm = this;
 
-        self.setImage = function setImage(imageUrl) {
-          self.mainImageUrl = imageUrl;
+        Phone.getPhone($routeParams.phoneId)
+          .then(function(result) {
+            console.log('Result ' + JSON.stringify(result));
+            vm.phone = result.data;
+            vm.setImage(result.data.images[0]);
+          });
+
+        vm.setImage = function setImage(imageUrl) {
+          vm.mainImageUrl = imageUrl;
         };
       }
     ]
