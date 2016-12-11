@@ -7,12 +7,9 @@
 
 var fs = require('fs');
 var path = require('path');
-var linesert = require( "linesert" );
 var ANSI_GREEN = '\x1b[32m';
 var ANSI_DEFAULT = '\x1b[0m';
 var ANSI_RED = '\x1b[35m';
-
-var importStatement = "import * as angular from 'angular';";
 
 var walkSync = function(dir, filelist) {
   var files = fs.readdirSync(dir);
@@ -25,7 +22,7 @@ var walkSync = function(dir, filelist) {
       if(getFileExtension(file) === 'js' || getFileExtension(file) === 'ts'){
         var renamed = file.slice(0, -3) + '.ts';
         fs.rename(path.join(dir, file), path.join(dir, renamed), function(err){
-          err ? console.log(err) : null; //insertAngularStatement(path.join(dir, renamed));
+          err ? console.log(err) : null;
           
         });
         path.join(dir, renamed)
@@ -40,15 +37,9 @@ var getFileExtension = function(file){
   return splitted[splitted.length - 1];
 };
 
-function insertAngularStatement(pathToFile){
-  linesert(pathToFile).beforeLine(1).insert(importStatement, function(err, result){
-    if(err){
-      console.log(ANSI_RED, 'error while inserting into ' + pathToFile, ANSI_DEFAULT);
-    }else{
-      console.log(ANSI_GREEN,'successfully inserted angular into ' + pathToFile + ANSI_DEFAULT );
-    }
-  });
+try {
+  walkSync(process.argv[2]);
+  console.log(ANSI_GREEN, 'finished renaming js files to ts', ANSI_DEFAULT);
+} catch(err){
+  console.log(ANSI_RED, 'something went wrong wile renaming js files', ANSI_DEFAULT);
 }
-
-
-walkSync(process.argv[2]);
