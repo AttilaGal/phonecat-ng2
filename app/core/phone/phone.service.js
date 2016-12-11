@@ -2,7 +2,7 @@
 
 angular
   .module('core.phone')
-  .factory('Phone', PhoneService);
+  .factory('PhoneService', PhoneService);
 
 PhoneService.$inject = ['$http'];
 function PhoneService($http) {
