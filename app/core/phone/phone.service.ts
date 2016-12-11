@@ -15,7 +15,7 @@ angular
     }
 
     getPhone(phoneId) {
-      var url = 'phones/' + phoneId + '.json';
+      let url = 'phones/' + phoneId + '.json';
       return this.$http.get(url);
     }
 
