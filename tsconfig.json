@@ -1,13 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "system",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es5",
+    "noImplicitAny": false,
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "types": ["node"],
+    "outDir": "lib",
+    "skipLibCheck": true,
     "rootDir": "app",
-    "outDir": "dist",
     "allowJs": true
   },
   "exclude": [
@@ -15,6 +22,13 @@
     "gulpFile.js",
     "dist",
     "typings/main.d.ts",
-    "typings/main"
+    "typings/main",
+    "insertAngular.js",
+    "renamer.js"
   ]
+  // configuration below is needed later on in the course
+//,
+//  "angularCompilerOptions": {
+//    "entryModule": "src/ng2_app#Ng2AppModule"
+//  }
 }
