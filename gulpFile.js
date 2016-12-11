@@ -5,6 +5,13 @@ var angularFilesort = require('gulp-angular-filesort');
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json');
 
+gulp.task('typescript', function(){
+  return tsProject
+    .src()
+    .pipe(tsProject())
+    .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('move-files', function(){
   return gulp
     .src([
@@ -17,13 +24,6 @@ gulp.task('move-files', function(){
       './app/**/*.json'
     ])
     .pipe(gulp.dest('./dist'));
-});
-
-gulp.task('typescript', function(){
-  return tsProject
-    .src()
-    .pipe(tsProject())
-    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('inject', ['move-files', 'typescript'], function(){

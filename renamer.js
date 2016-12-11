@@ -25,7 +25,7 @@ var walkSync = function(dir, filelist) {
       if(getFileExtension(file) === 'js' || getFileExtension(file) === 'ts'){
         var renamed = file.slice(0, -3) + '.ts';
         fs.rename(path.join(dir, file), path.join(dir, renamed), function(err){
-          err ? console.log(err) : insertAngularStatement(path.join(dir, renamed));
+          err ? console.log(err) : null; //insertAngularStatement(path.join(dir, renamed));
           
         });
         path.join(dir, renamed)

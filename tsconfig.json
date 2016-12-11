@@ -12,7 +12,7 @@
       "dom"
     ],
     "types": ["node"],
-    "outDir": "lib",
+    "outDir": "dist",
     "skipLibCheck": true,
     "rootDir": "app",
     "allowJs": true
@@ -21,14 +21,7 @@
     "node_modules",
     "gulpFile.js",
     "dist",
-    "typings/main.d.ts",
-    "typings/main",
     "insertAngular.js",
     "renamer.js"
   ]
-  // configuration below is needed later on in the course
-//,
-//  "angularCompilerOptions": {
-//    "entryModule": "src/ng2_app#Ng2AppModule"
-//  }
 }
