@@ -5,7 +5,7 @@
   "description": "A tutorial application for upgrading to Angular 2",
   "license": "MIT",
   "scripts": {
-    "prestart": "npm install",
+    "prestart": "gulp",
     "start": "http-server -a localhost -p 8000 -c-1 -o"
   },
   "dependencies": {
