@@ -1,8 +1,6 @@
-'use strict';
 
-angular.
-  module('phonecatApp').
-  config(['$locationProvider' ,'$routeProvider',
+export const Ng1AppConfig = 
+  ['$locationProvider' ,'$routeProvider',
     function config($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 
@@ -15,4 +13,4 @@ angular.
         }).
         otherwise('/phones');
     }
-  ]);
+  ];

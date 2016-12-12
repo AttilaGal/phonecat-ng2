@@ -1,4 +1,11 @@
 'use strict';
 
+import * as angular from 'angular';
+
+import {PhoneListComponent} from './phone-list.component';
+import {CorePhoneModule} from '../core/phone/phone.module'
+
 // Define the `phoneList` module
-angular.module('phoneList', ['core.phone']);
+export const PhoneListModule = angular.module('phoneList', [CorePhoneModule.name]);
+
+PhoneListModule.component('phoneList', PhoneListComponent);

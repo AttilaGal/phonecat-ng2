@@ -1,13 +1,20 @@
 'use strict';
 
+import * as angular from 'angular';
+import 'angular-route';
+
+import {Ng1AppConfig} from "./app.config";
+
+import {CoreModule} from './core/core.module';
+import {PhoneDetailModule} from './phone-detail/phone-detail.module';
+import {PhoneListModule} from './phone-list/phone-list.module';
+
 // Define the `phonecatApp` module
-angular.module('phonecatApp', [
+export const Ng1AppModule = angular.module('phonecatApp', [
   'ngRoute',
-  'core',
-  'phoneDetail',
-  'phoneList'
+  CoreModule.name,
+  PhoneListModule.name,
+  PhoneDetailModule.name
 ]);
 
-angular.element(document).ready(function() {
-  angular.bootstrap(document, ['phonecatApp']);
-});
+Ng1AppModule.config(Ng1AppConfig);

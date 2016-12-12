@@ -1,8 +1,8 @@
 'use strict';
 
 // Register `phoneList` component, along with its associated controller and template
-angular.module('phoneList').component('phoneList', {
-	templateUrl: 'phone-list/phone-list.template.html',
+export const PhoneListComponent =  {
+	template: require('./phone-list.template.html'),
 	controller: class PhoneListController {
 		PhoneService:any;
 		phones:any;
@@ -20,5 +20,5 @@ angular.module('phoneList').component('phoneList', {
 		}
 
 	}
-});
+};
 

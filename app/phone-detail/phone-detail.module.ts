@@ -1,7 +1,14 @@
 'use strict';
 
+import * as angular from 'angular';
+
+import {CoreModule} from '../core/core.module';
+import {PhoneDetailComponent} from './phone-detail.component';
+
 // Define the `phoneDetail` module
-angular.module('phoneDetail', [
+export const PhoneDetailModule = angular.module('phoneDetail', [
   'ngRoute',
-  'core.phone'
+  CoreModule.name
 ]);
+
+PhoneDetailModule.component('phoneDetail', PhoneDetailComponent);

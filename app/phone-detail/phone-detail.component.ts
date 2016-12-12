@@ -1,8 +1,8 @@
 'use strict';
 
 // Register `phoneDetail` component, along with its associated controller and template
-angular.module('phoneDetail').component('phoneDetail', {
-  templateUrl: 'phone-detail/phone-detail.template.html',
+export const PhoneDetailComponent = {
+  template: require('./phone-detail.template.html'),
   controller: class PhoneDetailController {
 	  $routeParams: any;
 	  PhoneService: any;
@@ -25,4 +25,4 @@ angular.module('phoneDetail').component('phoneDetail', {
 		  this.mainImageUrl = imageUrl;
 	  };
   }
-});
+};

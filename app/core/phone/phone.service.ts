@@ -1,8 +1,6 @@
 'use strict';
 
-angular
-  .module('core.phone')
-  .service('PhoneService', class PhoneService{
+export default class PhoneService{
     $http: any;
     
     static $inject = ['$http'];
@@ -19,5 +17,5 @@ angular
       return this.$http.get(url);
     }
 
-  });
+};
 
