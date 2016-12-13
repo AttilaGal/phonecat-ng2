@@ -1,8 +1,8 @@
 var ngtools = require('@ngtools/webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-//TODO get css to work
 module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
@@ -39,7 +39,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './app/index.html',
       inject: 'body'
-    })
+    }),
+    new ExtractTextPlugin('style.css')
   ],
   module: {
     loaders: [
@@ -49,13 +50,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader'
+        loaders: ['style', 'css']
       },
       {
         test: /\.html$/,
         exclude: /node_modules/,
         loader: 'raw-loader'
-      }
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+        loader: 'file'
+      },
     ]
   },
 
