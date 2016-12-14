@@ -1,21 +1,32 @@
-'use strict';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs';
+import 'rxjs/add/operator/map';
 
-export default class PhoneService{
-    $http: any;
-    
-    static $inject = ['$http'];
-    constructor($http) {
-      this.$http = $http;
+@Injectable()
+export class PhoneService{
+    http: Http;
+
+    constructor(http: Http) {
+      this.http = http;
     }
 
-    getAllPhones() {
-      return this.$http.get('phones/phones.json');
+    getAllPhones(): Observable<PhoneData[]>{
+      return this.http
+        .get('phones/phones.json')
+        .map( (res: Response) => res.json() );
     }
 
     getPhone(phoneId) {
-      let url = 'phones/' + phoneId + '.json';
-      return this.$http.get(url);
+      return this.http
+        .get(`phones/${phoneId}.json`)
+        .map( (res: Response) => res.json() );
     }
 
-};
+}
 
+export interface PhoneData {
+  name: string;
+  snippet: string;
+  images: string[];
+}

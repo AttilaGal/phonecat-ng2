@@ -2,6 +2,7 @@
 
 import * as angular from 'angular';
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {downgradeComponent} from '@angular/upgrade/static';
 
@@ -13,7 +14,7 @@ import {CorePhoneModule} from '../core/phone/phone.module'
 export const PhoneListModule = angular.module('phoneList', [CorePhoneModule.name]);
 
 @NgModule({
-  imports: [BrowserModule],
+  imports: [BrowserModule, FormsModule],
   // components migrated to Angular 2 should be registered here
   declarations: [PhoneListComponent],
   entryComponents: [PhoneListComponent]

@@ -1,5 +1,9 @@
 
 import {Component, OnInit} from '@angular/core';
+import {
+  PhoneService,
+  PhoneData
+} from "../core/phone/phone.service";
 
 @Component({
   selector: 'phone-list',
@@ -7,45 +11,53 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PhoneListComponent implements OnInit {
   
-  // PhoneService:any;
-  phones:any;
+  phoneService: PhoneService;
+  phones: any;
   orderProp:string = 'age';
+  query: string;
 
-  // static $inject = ['PhoneService'];
-  //
-  // constructor(PhoneService) {
-  //   this.PhoneService = PhoneService;
-  //
-  //   this.PhoneService.getAllPhones()
-  //     .then((result) => {
-  //       this.phones = result.data;
-  //     });
-  // }
+
+  constructor(phoneService: PhoneService) {
+    this.phoneService = phoneService;
+  }
   
   ngOnInit(): void{
-    this.phones = [
-        {
-          "age": 0,
-          "id": "motorola-xoom-with-wi-fi",
-          "imageUrl": "img/phones/motorola-xoom-with-wi-fi.0.jpg",
-          "name": "Motorola XOOM\u2122 with Wi-Fi",
-          "snippet": "The Next, Next Generation\r\n\r\nExperience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb)."
-        },
-        {
-          "age": 1,
-          "id": "motorola-xoom",
-          "imageUrl": "img/phones/motorola-xoom.0.jpg",
-          "name": "MOTOROLA XOOM\u2122",
-          "snippet": "The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM, the world's first tablet powered by Android 3.0 (Honeycomb)."
-        },
-        {
-          "age": 2,
-          "carrier": "AT&T",
-          "id": "motorola-atrix-4g",
-          "imageUrl": "img/phones/motorola-atrix-4g.0.jpg",
-          "name": "MOTOROLA ATRIX\u2122 4G",
-          "snippet": "MOTOROLA ATRIX 4G the world's most powerful smartphone."
-        },
-      ]
+    this.phoneService
+      .getAllPhones()
+      .subscribe( phones => {
+        this.phones = phones;
+      });
+  }
+
+  getPhones(): PhoneData[] {
+    return this.sortPhones(this.filterPhones(this.phones));
+  }
+  
+  private filterPhones(phones: PhoneData[]) {
+    if (phones && this.query) {
+      return phones.filter(phone => {
+        let name = phone.name.toLowerCase();
+        let snippet = phone.snippet.toLowerCase();
+        return name.indexOf(this.query) >= 0 || snippet.indexOf(this.query) >= 0;
+      });
+    }
+    return phones;
+  }
+  
+  private sortPhones(phones: PhoneData[]) {
+    if (phones && this.orderProp) {
+      return phones
+        .slice(0) // Make a copy
+        .sort((a, b) => {
+          if (a[this.orderProp] < b[this.orderProp]) {
+            return -1;
+          } else if ([b[this.orderProp] < a[this.orderProp]]) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+    }
+    return phones;
   }
 }
