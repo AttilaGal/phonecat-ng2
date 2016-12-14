@@ -2,12 +2,21 @@
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
+//import styles
 import './app.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
-import * as angular from 'angular';
-import {Ng1AppModule} from './app.module';
+import {Ng1AppModule} from './ng1app.module';
+import {Ng2AppModule} from './ng2_app';
 
-angular.element(document).ready(function() {
-  angular.bootstrap(document, [Ng1AppModule.name]);
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
+
+/**
+ * We bootstrap the Angular 2 module first, and then, once it's done,
+ * bootstrap the Angular 1 module.
+ */
+platformBrowserDynamic().bootstrapModule(Ng2AppModule).then(ref => {
+  // bootstrap angular1
+  (<any>ref.instance).upgrade.bootstrap(document.body, [Ng1AppModule.name]);
 });

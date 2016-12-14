@@ -23,6 +23,9 @@
     "dist",
     "insertAngular.js",
     "renamer.js"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "entryModule": "app/ng2_app#Ng2AppModule"
+  }
 
 }

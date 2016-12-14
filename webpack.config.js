@@ -17,9 +17,9 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
-    // new ngtools.AotPlugin({
-    //   tsConfigPath: './tsconfig.json'
-    // }),
+    new ngtools.AotPlugin({
+      tsConfigPath: './tsconfig.json'
+    }),
     new CopyWebpackPlugin([
       {
         context: __dirname + '/app/img',
@@ -46,7 +46,7 @@ module.exports = {
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'ts-loader'
+        loader: '@ngtools/webpack'
       },
       {
         test: /\.css$/,

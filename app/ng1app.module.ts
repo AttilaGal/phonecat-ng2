@@ -3,7 +3,7 @@
 import * as angular from 'angular';
 import 'angular-route';
 
-import {Ng1AppConfig} from "./app.config";
+import {Ng1AppConfig} from "./ng2app.config";
 
 import {CoreModule} from './core/core.module';
 import {PhoneDetailModule} from './phone-detail/phone-detail.module';
