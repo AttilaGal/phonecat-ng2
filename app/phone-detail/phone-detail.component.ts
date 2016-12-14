@@ -1,30 +1,24 @@
 'use strict';
 
-export class PhoneDetailController {
-  $routeParams: any;
-  PhoneService: any;
-  phone: any;
+import { Component, Inject } from '@angular/core';
+import { PhoneService, PhoneData } from '../core/phone/phone.service';
+@Component({
+  selector: 'phone-detail',
+  templateUrl: 'phone-detail.template.html',
+})
+export class PhoneDetailComponent {
+
+  phone: PhoneData;
   mainImageUrl: string;
-
-  static $inject = ['$routeParams', 'PhoneService'];
-  constructor($routeParams, PhoneService) {
-    this.PhoneService = PhoneService;
-    this.$routeParams = $routeParams;
-
-    this.PhoneService.getPhone(this.$routeParams.phoneId)
-      .then( (result) => {
-        this.phone = result.data;
-        this.setImage(result.data.images[0]);
-      });
+  
+  constructor(@Inject('$routeParams') $routeParams: any, phoneService: PhoneService) {
+    phoneService.getPhone($routeParams['phoneId']).subscribe(phone => {
+      this.phone = phone;
+      this.setImage(phone.images[0]);
+    });
   }
 
-  setImage(imageUrl){
+  setImage(imageUrl: string) {
     this.mainImageUrl = imageUrl;
-  };
+  }
 }
-
-// Register `phoneDetail` component, along with its associated controller and template
-export const PhoneDetailComponent = {
-  template: require('./phone-detail.template.html'),
-  controller: PhoneDetailController
-};

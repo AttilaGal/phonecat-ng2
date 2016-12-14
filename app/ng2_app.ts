@@ -4,6 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {UpgradeModule} from '@angular/upgrade/static';
 import {PhoneListNgModule} from "./phone-list/phone-list.module";
 import {PhoneService} from "./core/phone/phone.service";
+import {PhoneDetailNgModule} from "./phone-detail/phone-detail.module";
 
 @Component({
   selector: 'root-cmp',
@@ -19,14 +20,23 @@ export class RootCmp {}
     UpgradeModule,
     HttpModule,
     
-    PhoneListNgModule
+    PhoneListNgModule,
+    PhoneDetailNgModule
   ],
   bootstrap: [RootCmp],
   declarations: [RootCmp],
   providers: [
-    PhoneService
+    PhoneService,
+    {
+      provide: '$routeParams',
+      useFactory: routeParamsFactory,
+      deps: ['$injector']
+    }
   ]
 })
 export class Ng2AppModule {
   constructor(public upgrade: UpgradeModule){}
+}
+export function routeParamsFactory(i: any) {
+  return i.get('$routeParams');
 }
