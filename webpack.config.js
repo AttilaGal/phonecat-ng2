@@ -1,14 +1,10 @@
-var ngtools = require('@ngtools/webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   resolve: {
-    extensions: ['.ts', '.js'],
-    alias: {
-      "@angular/upgrade/static": "@angular/upgrade/bundles/upgrade-static.umd.js"
-    }
+    extensions: ['.ts', '.js']
   },
   entry: './app/main.ts',
   output: {
